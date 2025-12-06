@@ -6,8 +6,8 @@
 <text x="58" y="30" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="white">meri AI</text>
 <defs>
 <linearGradient id="paint0_linear" x1="46" y1="0" x2="0" y2="46" gradientUnits="userSpaceOnUse">
-<stop stop-color="#6366F1"/>
-<stop offset="1" stop-color="#8B5CF6"/>
+<stop stop-color="#06B3D0"/>
+<stop offset="1" stop-color="#0891B2"/>
 </linearGradient>
 </defs>
 </svg>

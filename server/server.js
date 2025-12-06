@@ -5,6 +5,7 @@ import connectDB from './configs/db.js';
 import userRouter from './routes/userRoutes.js'; 
 import chatRouter from './routes/chatRoutes.js';
 import messageRouter from './routes/messageRoutes.js';
+import uploadRouter from './routes/uploadRoutes.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get('/', (req, res) => { res.send('API is running...'); });
 app.use('/api/user', userRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/message', messageRouter); 
+app.use('/api/upload', uploadRouter);
 
 const PORT = process.env.PORT || 5000;
 

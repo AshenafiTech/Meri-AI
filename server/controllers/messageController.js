@@ -3,14 +3,14 @@ import Chat from "../models/Chat.js";
 import User from "../models/User.js";
 import imagekit from "../configs/imageKit.js";
 import openai from "../configs/openai.js";
+import { translateText } from "../configs/translate.js";
 
 
 // Text-based AI Chat Message Controller
 export const textMessageController = async (req, res) => {
     try {
         const userId = req.user._id;
-        const { chatId, prompt } = req.body;
-
+        const { chatId, prompt, language } = req.body;
 
         const chat = await Chat.findOne({userId, _id: chatId});
         if (!chat) {
@@ -28,10 +28,29 @@ export const textMessageController = async (req, res) => {
                 },
             ],
         });
-        
 
-        // Fix: use response.choices from OpenAI API
-        const reply = {...response.choices[0].message, timestamp: Date.now(), isImage: false};
+        // Get the AI response
+        let aiText = response.choices[0].message.content;
+        console.log('AI response before translation:', aiText);
+
+        // Translate if language is provided and not English
+        let translatedText = aiText;
+        if (language && language !== 'en') {
+            try {
+                translatedText = await translateText(aiText, language);
+                console.log('Translated response:', translatedText);
+            } catch (err) {
+                console.error('Translation error:', err);
+                translatedText = aiText;
+            }
+        }
+
+        const reply = {
+            ...response.choices[0].message,
+            content: translatedText,
+            timestamp: Date.now(),
+            isImage: false
+        };
         res.json({ success: true, reply });
 
         chat.messages.push(reply);
@@ -40,9 +59,9 @@ export const textMessageController = async (req, res) => {
         await User.updateOne({_id: userId}, {$inc: { credits: -1 } });
 
     } catch (error) {
+        console.error('Controller error:', error);
         res.json({ success: false, message: error.message });
     }
-
 }
 
 // Image Generation AI Message Controller

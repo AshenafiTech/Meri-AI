@@ -20,7 +20,7 @@ const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
         {/* New Chat Button */}
 
         <button className='flex justify-center items-center w-full py-2 mt-10
-        text-white bg-gradient-to-r from-[#A456F7] to-[#3D81F6] text-sm rounded-md cursor-pointer'>
+        text-white bg-gradient-to-r from-[#06B3D0] to-[#0891B2] text-sm rounded-md cursor-pointer'>
             <span className='mr-2 text-xl'>+</span> New Chat
         </button>
 
@@ -85,7 +85,7 @@ const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
             </div>
             <label className='relative inline-flex cursor-pointer'>
                 <input onChange={()=> setTheme(theme === 'dark' ? 'light' : 'dark')} type="checkbox" className='sr-only peer' checked={theme === 'dark'}  />
-                <div className='w-9 h-5 bg-gray-400 rounded-full peer-checked:bg-purple-600 transition-all peer-checked:bg-purple-600 transition-all'>
+                <div className='w-9 h-5 bg-gray-400 rounded-full peer-checked:bg-cyan-600 transition-all peer-checked:bg-cyan-600 transition-all'>
                 </div>
                 <span className='absolute left-1 top-1 w-3 h-3 bg-white rounded-full 
                 transition-transform peer-checked:translate-x-4'></span>
